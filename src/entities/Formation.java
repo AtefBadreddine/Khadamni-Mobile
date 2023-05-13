@@ -19,6 +19,7 @@ public class Formation {
     private String nom_formateur;
     private int duree;
     private int prix;
+    private int userRating;
     private float rating;
 
     public Formation() {
@@ -107,6 +108,15 @@ public class Formation {
     public void setRating(float rating) {
         this.rating = rating;
     }
+
+    public int getUserRating() {
+        return userRating;
+    }
+
+    public void setUserRating(int userRating) {
+        this.userRating = userRating;
+    }
+    
     
 
     @Override

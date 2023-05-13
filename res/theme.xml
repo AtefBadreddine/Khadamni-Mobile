@@ -266,21 +266,28 @@
         <val key="GroupElement.padUnit" value="2,2,2,2" />
         <val key="GroupElement.padding" value="3,3,3,3" />
         <val key="GroupElement.transparency" value="0" />
+        <val key="GroupElementFirst.bgColor" value="ffffcc" />
+        <val key="GroupElementFirst.bgImage" value="background.jpg" />
+        <val key="GroupElementFirst.bgType" value="1" />
         <border key="GroupElementFirst.border" type="image" i1="GroupElementFirst.borderTop_1.png" i2="GroupElementFirst.borderBottom_1.png" i3="GroupElementFirst.borderLeft_1.png" i4="GroupElementFirst.borderRight_1.png" i5="GroupElementFirst.borderTopL_1.png" i6="GroupElementFirst.borderTopR_1.png" i7="GroupElementFirst.borderBottomL_1.png" i8="GroupElementFirst.borderBottomR_1.png" i9="GroupElementFirst.borderCenter_1.png" />
         <val key="GroupElementFirst.fgColor" value="4d606f" />
         <font key="GroupElementFirst.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="3.0" />
         <val key="GroupElementFirst.marUnit" value="2,2,2,2" />
-        <val key="GroupElementFirst.margin" value="1,0,1,1" />
+        <val key="GroupElementFirst.margin" value="1.0,0.0,1.0,1.0" />
         <val key="GroupElementFirst.padUnit" value="2,2,2,2" />
-        <val key="GroupElementFirst.padding" value="3,3,3,3" />
+        <val key="GroupElementFirst.padding" value="3.0,3.0,3.0,3.0" />
+        <border key="GroupElementFirst.sel#border" type="image" i1="GroupElementFirst.borderTop_1.png" i2="GroupElementFirst.borderBottom_1.png" i3="GroupElementFirst.borderLeft_1.png" i4="GroupElementFirst.borderRight_1.png" i5="GroupElementFirst.borderTopL_1.png" i6="GroupElementFirst.borderTopR_1.png" i7="GroupElementFirst.borderBottomL_1.png" i8="GroupElementFirst.borderBottomR_1.png" i9="GroupElementFirst.borderCenter_1.png" />
         <val key="GroupElementFirst.transparency" value="0" />
+        <val key="GroupElementLast.bgImage" value="background.jpg" />
+        <val key="GroupElementLast.bgType" value="1" />
         <border key="GroupElementLast.border" type="image" i1="GroupElementLast.borderTop_1.png" i2="GroupElementLast.borderBottom_1.png" i3="GroupElementLast.borderLeft_1.png" i4="GroupElementLast.borderRight_1.png" i5="GroupElementLast.borderTopL_1.png" i6="GroupElementLast.borderTopR_1.png" i7="GroupElementLast.borderBottomL_1.png" i8="GroupElementLast.borderBottomR_1.png" i9="GroupElementLast.borderCenter_1.png" />
         <val key="GroupElementLast.fgColor" value="4d606f" />
         <font key="GroupElementLast.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="3.0" />
         <val key="GroupElementLast.marUnit" value="2,2,2,2" />
-        <val key="GroupElementLast.margin" value="0,1,1,1" />
+        <val key="GroupElementLast.margin" value="0.0,1.0,1.0,1.0" />
         <val key="GroupElementLast.padUnit" value="2,2,2,2" />
-        <val key="GroupElementLast.padding" value="3,3,3,3" />
+        <val key="GroupElementLast.padding" value="3.0,3.0,3.0,3.0" />
+        <border key="GroupElementLast.sel#border" type="image" i1="GroupElementLast.borderTop_1.png" i2="GroupElementLast.borderBottom_1.png" i3="GroupElementLast.borderLeft_1.png" i4="GroupElementLast.borderRight_1.png" i5="GroupElementLast.borderTopL_1.png" i6="GroupElementLast.borderTopR_1.png" i7="GroupElementLast.borderBottomL_1.png" i8="GroupElementLast.borderBottomR_1.png" i9="GroupElementLast.borderCenter_1.png" />
         <val key="GroupElementLast.transparency" value="0" />
         <border key="GroupElementOnly.border" type="image" i1="GroupElementOnly.borderTop_1.png" i2="GroupElementOnly.borderBottom_1.png" i3="GroupElementOnly.borderLeft_1.png" i4="GroupElementOnly.borderRight_1.png" i5="GroupElementOnly.borderTopL_1.png" i6="GroupElementOnly.borderTopR_1.png" i7="GroupElementOnly.borderBottomL_1.png" i8="GroupElementOnly.borderBottomR_1.png" i9="GroupElementOnly.borderCenter_1.png" />
         <val key="GroupElementOnly.fgColor" value="4d606f" />

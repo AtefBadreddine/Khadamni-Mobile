@@ -10,16 +10,17 @@ package utils;
  * @author Andrew
  */
 public class Statics {
+
     //url du serveur
-    public static final String BASE_URL="http://127.0.0.1:8000/formation/api/";
+    public static final String BASE_URL = "http://127.0.0.1:8000/formation/api/";
     public static final String URL_NEW = "http://127.0.0.1:8000/formation/api/new/";
     public static final String URL_UPDATE = "http://127.0.0.1:8000/formation/api/edit/";
     public static final String URL_DELETE = "http://127.0.0.1:8000/formation/api/delete/";
-    public static final String URL_USERFORMATIONS = "http://127.0.0.1:8000/formation/api/userFormations";
     public static final String URL_USERINSCRIPTIONS = "http://127.0.0.1:8000/formation/api/userInscriptions";
+    public static final String URL_ADDRATING = "http://127.0.0.1:8000/formation/api/newRating";
+    public static final String URL_SHOW = "http://127.0.0.1:8000/formation/api/showJSON";
+    public static final String URL_ANNULERINSCR = "http://127.0.0.1:8000/formation/api/annuler";
     public static final String Url_Signin = "http://127.0.0.1:8000";
-     public static final String URL_REC = "http://127.0.0.1:8000/reclamation/service/";
-    
-    
-    
+    public static final String URL_REC = "http://127.0.0.1:8000/reclamation/service/";
+
 }

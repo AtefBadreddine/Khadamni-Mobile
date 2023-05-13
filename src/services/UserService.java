@@ -181,7 +181,39 @@ public class UserService {
 //        NetworkManager.getInstance().addToQueueAndWait(req);
 //    return json;
 //    }
-  
+  public void SendReset(User c) {
+
+        String url = Statics.Url_Signin + "/reset-password/requestMobile?email=" + c.getEmail();
+
+      System.out.println(url);
+        req.setUrl(url);
+        req.setPost(false);
+       req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+               JSONParser j = new JSONParser();
+
+            String json = new String(req.getResponseData()) + "";
+
+            try {
+                if (json.equals("mail not found")) {
+                    Dialog.show("Failure", "mail not found", "OK", null);
+                } else if (json.equals("token error")) {
+                    Dialog.show("Failure", "token error", "OK", null);
+                }
+                else if (json.equals("mail sent successfully"))
+                {
+                    Dialog.show("Success", "mail sent successfully", "OK", null);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            req.removeResponseCodeListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        
+    }
      public boolean addTask(User t) {
          
       

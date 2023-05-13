@@ -2,6 +2,7 @@ package gui;
 
 
 import com.codename1.ui.FontImage;
+import com.codename1.ui.TextField;
 import com.codename1.ui.util.Resources;
 import services.UserService;
 
@@ -17,8 +18,7 @@ private Resources theme;
         getTitleArea().setUIID("Container");
         getToolbar().setUIID("Container");
      
-        username.setText("");
-        password.setText("");
+     
         //ajout de la croit de fermeture
 //        getToolbar().addCommandToLeftBar("", mat, e -> new WalkthruForm().showBack());
         getContentPane().setUIID("SignInForm");
@@ -92,8 +92,12 @@ private Resources theme;
         gui_Component_Group_1.addComponent(username);
         password.setText("");
         password.setName("Text_Field_2");
+        password.setHint(" email");
+        username.setConstraint(TextField.PASSWORD);
+
         username.setText("");
         username.setName("Text_Field_1");
+        username.setHint(" mot de passe");
         gui_Container_1.addComponent(signIn);
         gui_Container_1.addComponent(gui_Button_3);
         gui_Label_1.setUIID("CenterLabel");
@@ -105,6 +109,12 @@ private Resources theme;
         gui_Button_3.setText("Forgot Your Password");
         gui_Button_3.setUIID("CenterLabelSmall");
         gui_Button_3.setName("Button_3");
+       
+        gui_Button_3.addActionListener(e -> {
+    // create a new instance of the profile form and show it
+   new forgotpassword().show();
+    
+});
         addComponent(com.codename1.ui.layouts.BorderLayout.SOUTH, signup);
         gui_Container_1.setScrollableY(true);
         gui_Container_1.setName("Container_1");

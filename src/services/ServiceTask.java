@@ -14,6 +14,7 @@ import com.codename1.ui.List;
 import com.codename1.ui.events.ActionListener;
 import entities.Formation;
 import entities.Task;
+import gui.SessionManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -51,12 +52,14 @@ public class ServiceTask {
  
  
        public boolean addFormation(Formation f) {
+        String id =String.valueOf(SessionManager.getId()) ;
+           System.out.println(id);
         String name = f.getNom_formation();
         String desc = f.getDescription();
         int prix = f.getPrix();
         int duree = f.getDuree();
 
-        String url = Statics.URL_NEW + "?nomFormation=" + name + "&description=" + desc + "&prix=" + prix + "&duree=" + duree;
+        String url = Statics.URL_NEW + "?nomFormation=" + name + "&description=" + desc + "&prix=" + prix + "&duree=" + duree +"&id="+id;
 
         req.setUrl(url);
         //GET =>
@@ -137,7 +140,7 @@ public class ServiceTask {
                 String nom = obj.get("nomFormation").toString();
                 String desc = obj.get("description").toString();
                 String nomFormateur = obj.get("nomFormateur").toString();
-
+                int userRating = (int) Float.parseFloat(obj.get("userRating").toString());
                 f.setId_formation(id);
                 f.setRating(rating);
                 f.setNom_formation(nom);
@@ -146,6 +149,7 @@ public class ServiceTask {
                 f.setDescription(desc);
                 f.setPrix(prix);
                 f.setDuree(duree);
+                f.setUserRating(userRating);
                 formations.add(f);
             }
 
@@ -156,9 +160,11 @@ public class ServiceTask {
     }
 
     //methode d'affichage
-    public ArrayList<Formation> getAllFormations() {
-        String url = Statics.BASE_URL;
-
+    public ArrayList<Formation> getAllFormations(String url) {
+        
+    
+        
+       
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -173,5 +179,104 @@ public class ServiceTask {
 
         return formations;
     }
+       public boolean addRating(Formation f,String note) {
+        String idUser =String.valueOf(SessionManager.getId()) ;
+          
+        String idFormation = String.valueOf(f.getId_formation());
 
+        String url = Statics.URL_ADDRATING + "?idUser=" + idUser + "&idFormation=" + idFormation + "&note=" + note;
+
+        req.setUrl(url);
+        //GET =>
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOk = req.getResponseCode() == 200; //si le code return 200 
+                //
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOk;
+
+    }
+       public Formation getFormation(int idFormation) {
+             int idUser = SessionManager.getId();
+             String url = Statics.URL_SHOW + "?idFormation=" +idFormation+"&idUser="+idUser;
+             Formation f = new Formation();
+             req.setUrl(url);
+             req.setPost(false);
+             
+            req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOk = req.getResponseCode() == 200; //si le code return 200 
+              
+                JSONParser j = new JSONParser();
+                String jsonText = new String (req.getResponseData());
+             
+                try {
+                    Map<String, Object> formationsListJson = j.parseJSON(new CharArrayReader(jsonText.toCharArray()));
+                     java.util.List<Map<String, Object>> list = (java.util.List<Map<String, Object>>) formationsListJson.get("root");
+                    
+               for (Map<String, Object> obj : list) {
+                  
+                
+                int id = (int) Float.parseFloat(obj.get("idFormation").toString());
+                int idFormateur = (int) Float.parseFloat(obj.get("idFormateur").toString());
+                int prix = (int) Float.parseFloat(obj.get("prix").toString());
+                int duree = (int) Float.parseFloat(obj.get("duree").toString());
+                float rating = Float.parseFloat(obj.get("rating").toString());
+                String nom = obj.get("nomFormation").toString();
+                String desc = obj.get("description").toString();
+                String nomFormateur = obj.get("nomFormateur").toString();
+                int userRating = (int) Float.parseFloat(obj.get("userRating").toString());
+                f.setId_formation(id);
+                f.setRating(rating);
+                f.setNom_formation(nom);
+                f.setNom_formateur(nomFormateur);
+                f.setId_formateur(idFormateur);
+                f.setDescription(desc);
+                f.setPrix(prix);
+                f.setDuree(duree);
+                f.setUserRating(userRating);
+               }
+                }
+                
+                catch (Exception e) {
+                }
+                 req.removeResponseListener(this);
+
+            }
+                       
+            });
+            NetworkManager.getInstance().addToQueueAndWait(req);
+               
+            return f;
+       
+            
+       }
+        public boolean annulerInscription(Formation f) {
+        String idUser =String.valueOf(SessionManager.getId()) ;
+          
+        String idFormation = String.valueOf(f.getId_formation());
+
+        String url = Statics.URL_ANNULERINSCR + "?idUser=" + idUser + "&idFormation=" + idFormation;
+
+        req.setUrl(url);
+        //GET =>
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOk = req.getResponseCode() == 200; //si le code return 200 
+                //
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOk;
+
+    }
 }

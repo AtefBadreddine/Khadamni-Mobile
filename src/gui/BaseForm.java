@@ -43,13 +43,15 @@ public class BaseForm extends Form {
         
               getToolbar().addCommandToSideMenu("Liste Evenement", null, e -> new gui.HomeForm(this).show());
 //        getToolbar().addCommandToSideMenu("Reclamation", trendingImage, e -> new TrendingForm(res).show());
-        getToolbar().addCommandToSideMenu("Settings", null, e -> {});
+         getToolbar().addCommandToSideMenu("Mon Profile", null, e -> new gui.ProfileForm(this).show());
         
         // spacer
         getToolbar().addComponentToSideMenu(new Label(" ", "SideCommand"));
         getToolbar().addComponentToSideMenu(new Label(res.getImage("profile_image.png"), "Container"));
-        getToolbar().addComponentToSideMenu(new Label("Detra Mcmunn", "SideCommandNoPad"));
-        getToolbar().addComponentToSideMenu(new Label("Long Beach, CA", "SideCommandSmall"));
+        String nom = SessionManager.getNom();
+        String prenom = SessionManager.getPrenom();
+        getToolbar().addComponentToSideMenu(new Label(prenom +" " +nom, "SideCommandNoPad"));
+     //   getToolbar().addComponentToSideMenu(new Label("Long Beach, CA", "SideCommandSmall"));
     }
 
         

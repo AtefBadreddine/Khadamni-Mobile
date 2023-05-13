@@ -6,61 +6,57 @@
 package gui;
 
 import com.codename1.ui.Button;
-import com.codename1.ui.CheckBox;
-import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
-import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.table.DefaultTableModel;
-import com.codename1.ui.table.Table;
-
+import com.codename1.ui.layouts.BorderLayout;
 
 import com.codename1.ui.table.TableLayout;
-import com.codename1.ui.table.TableModel;
-import entities.Formation;
 import entities.Reclamation;
 
 import java.util.ArrayList;
 import services.ReclamationService;
-import services.ServiceTask;
 
 /**
  *
  * @author Atef
  */
-public class ListReclamations extends BaseForm{
+public class ListReclamations extends BaseForm {
 
-    
-    
     public ListReclamations(Form previous) {
         setTitle("Liste reclamations");
-        setLayout(new TableLayout(2,2));
+        setLayout(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
 
-       ArrayList<Reclamation> Reclamations = ReclamationService.getinstance().getAllReclamations();
+        ArrayList<Reclamation> Reclamations = ReclamationService.getinstance().getAllReclamations();
 
-       add(new Label("nom Reclamation"));
-       add(new Label("Actions"));
-       
-       for (Reclamation f : Reclamations) {
-           add(new Label(f.getDescription()));
-             Button showButton = new Button("Consulter");
+        TableLayout tl = new TableLayout(2, 2);
+        tl.setGrowHorizontally(true);
+        setLayout(tl);
+
+        add(new Label("Nom Reclamation")).getAllStyles().setPadding(0, 0, 10, 0);
+        add(new Label("Actions")).getAllStyles().setPadding(0, 0, 10, 0);
+
+        for (Reclamation f : Reclamations) {
+            String description = f.getDescription();
+            if (description.length() > 20) {
+                description = description.substring(0, 20) + "...";
+            }
+            add(new Label(description)).getAllStyles().setPadding(0, 0, 10, 0);
+            Button showButton = new Button("Voir");
             showButton.addActionListener(e -> {
                 new ConsulterReclamation(this, f).show();
             });
-            add(showButton);
+            add(showButton).getAllStyles().setPadding(0, 0, 10, 0);
 
-       }
-           Button showButton = new Button("Ajouter Reclamation");
-            showButton.addActionListener(e -> {
-                new AjouterReclamation(this).show();
-            });
-            add(showButton);
-       
+        }
+        Button showButton = new Button("Ajouter Reclamation");
+        showButton.addActionListener(e -> {
+            new AjouterReclamation(this).show();
+        });
+        add(showButton);
 
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_LEFT, ev -> previous.showBack());
 
     }
 
 }
-

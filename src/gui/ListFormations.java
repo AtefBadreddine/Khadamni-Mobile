@@ -1,63 +1,50 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import com.codename1.ui.Button;
-import com.codename1.ui.CheckBox;
-import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
+import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.table.DefaultTableModel;
-import com.codename1.ui.table.Table;
-
-
 import com.codename1.ui.table.TableLayout;
-import com.codename1.ui.table.TableModel;
 import entities.Formation;
-
 import java.util.ArrayList;
 import services.ServiceTask;
+import utils.Statics;
 
-/**
- *
- * @author Atef
- */
-public class ListFormations extends BaseForm{
+public class ListFormations extends BaseForm {
 
-    
-    
     public ListFormations(Form previous) {
+        setLayout(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
         setTitle("Liste Formations");
-        setLayout(new TableLayout(2,2));
 
-       ArrayList<Formation> formations = ServiceTask.getinstance().getAllFormations();
+        int id = SessionManager.getId();
+        String url = Statics.BASE_URL + "?id=" + id;
 
-       add(new Label("nom Formation"));
-       add(new Label("Actions"));
-       
-       for (Formation f : formations) {
-           add(new Label(f.getNom_formation()));
-             Button showButton = new Button("Consulter");
-            showButton.addActionListener(e -> {
-                new ConsulterFormation(this, f).show();
-            });
-            add(showButton);
+        ArrayList<Formation> formations = ServiceTask.getinstance().getAllFormations(url);
 
-       }
-       
-          Button showButton = new Button("Ajouter Formation");
-            showButton.addActionListener(e -> {
-                new AjouterFormation(this).show();
-            });
-            add(showButton);
-        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_LEFT, ev -> previous.showBack());
+        TableLayout tl = new TableLayout(2, 2);
+        tl.setGrowHorizontally(true);
+        setLayout(tl);
 
+        add(new Label("Nom Formation")).getAllStyles().setPadding(0, 0, 10, 0);
+        add(new Label("Actions")).getAllStyles().setPadding(0, 0, 10, 0);
+
+        for (Formation f : formations) {
+            add(new Label(f.getNom_formation())).getAllStyles().setPadding(0, 0, 10, 0);
+            Button showButton = new Button("Consulter");
+            showButton.addActionListener(e -> new ConsulterFormation(this, f).show());
+            add(showButton).getAllStyles().setPadding(0, 0, 10, 0);
+        }
+
+        Button addBtn = new Button("Ajouter Formation");
+        addBtn.addActionListener(e -> new AjouterFormation(this).show());
+        add(addBtn).getAllStyles().setMargin(20, 0, 20, 0);
+
+        Button mesInscBtn = new Button("Mes inscriptions");
+        mesInscBtn.addActionListener(e -> new MesInscriptions(this).show());
+        add(mesInscBtn).getAllStyles().setMargin(0, 0, 20, 0);
+
+        getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, ev -> previous.showBack());
     }
-
 }
-
